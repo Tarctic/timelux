@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TIMELUX LLC — Metal &amp; Scrap Trading</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0c0e13}
+html{scroll-behavior:smooth}
+.page{position:relative;background:#0c0e13;color:#e7e9ee;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.page *{box-sizing:border-box}
+.page a{text-decoration:none;color:inherit}
+
+/* ---------- artwork (uploaded building photos) ---------- */
+.img-old{background-image:url(./assets/77374333d432d914a511c01449d8962d.jpg);background-repeat:no-repeat}
+.img-plate{background-image:url(./assets/bba129cb85fe487f7dd28c1ca1cdd90d.jpg);background-repeat:no-repeat}
+.img-new{background-image:url(./assets/46135a11be9b4b340860db8ad26f16ee.png);background-repeat:no-repeat}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:30;height:72px;margin-bottom:-72px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 72px;background:linear-gradient(180deg,rgba(12,14,19,.88),rgba(12,14,19,.62));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#6a93b8,#d6b083 35%,#d68a4d 65%,#6a93b8)}
+.brand{display:flex;align-items:center;gap:14px}
+.brand b{font-weight:700;font-size:22px;letter-spacing:.01em;color:#fff}
+.brand b i{font-style:normal;color:#d68a4d}
+.links{display:flex;align-items:center;gap:30px}
+.links a{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#cfd5dd;padding:10px 0;transition:color .2s}
+.links a:hover{color:#d68a4d}
+.links a.cta{color:#0c0e13;background:#d68a4d;padding:10px 20px;border-radius:999px;letter-spacing:.14em}
+.links a.cta:hover{color:#0c0e13;background:#e0a068}
+
+/* ---------- stage (sticky background) ---------- */
+.wrap{position:relative;view-timeline-name:--page;view-timeline-axis:block}
+.stage{position:sticky;top:0;height:900px;overflow:hidden;z-index:0;background:linear-gradient(180deg,#0c0e13 0%,#141a24 55%,#1e2733 100%)}
+.content{position:relative;z-index:1;margin-top:-900px}
+.scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,14,19,0) 38%,rgba(12,14,19,.82) 78%)}
+.veil{position:absolute;inset:0;background:rgba(12,14,19,0)}
+
+.oldwrap{position:absolute;inset:0;display:none}
+.oldbox{position:absolute;left:0;bottom:0;width:min(1100px,100%);aspect-ratio:1408/768;filter:brightness(.74) saturate(.92) contrast(1.05);-webkit-mask-image:linear-gradient(90deg,#000 72%,transparent),linear-gradient(180deg,transparent,#000 34%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#000 72%,transparent),linear-gradient(180deg,transparent,#000 34%);mask-composite:intersect}
+.oldplate{position:absolute;inset:0;background-size:100% 100%}
+.tile{position:absolute;background-repeat:no-repeat}
+.dust{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(214,200,180,.7),rgba(214,200,180,0) 68%);filter:blur(10px);opacity:0;pointer-events:none}
+
+.newbox{position:absolute;left:0;bottom:0;width:min(630px,100%);aspect-ratio:564/770;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 78%,transparent),linear-gradient(180deg,transparent,#000 14%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 78%,transparent),linear-gradient(180deg,transparent,#000 14%);mask-composite:intersect}
+.nt{position:absolute;background-repeat:no-repeat;background-image:url(./assets/46135a11be9b4b340860db8ad26f16ee.png)}
+.scafwrap{position:absolute;inset:7% 5% 4% 5%;opacity:.5;pointer-events:none}
+.scaf{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#d68a4d 0 2px,transparent 2px 64px),repeating-linear-gradient(0deg,#d68a4d 0 2px,transparent 2px 64px),repeating-linear-gradient(135deg,transparent 0 62px,rgba(214,138,77,.8) 62px 64px);clip-path:inset(100% 0 0 0)}
+
+/* ---------- sections ---------- */
+.sec{position:relative;min-height:900px;display:flex;align-items:center;padding:100px 72px 56px}
+.col{margin-left:auto;width:min(540px,100%)}
+.label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff}
+.tag{flex:none;width:22px;height:11px;border-radius:2px;background:#d68a4d}
+.tag.b{background:#6a93b8}
+.page h1{margin:22px 0 20px;font-weight:700;font-size:clamp(40px,4.6vw,64px);line-height:1.08;letter-spacing:-.01em;color:#fff}
+.page h2{margin:18px 0 14px;font-weight:600;font-size:clamp(28px,3vw,42px);line-height:1.16;letter-spacing:-.005em;color:#fff}
+.page h1 em,.page h2 em{font-style:normal;color:#d68a4d}
+.lede{margin:0;font-size:16px;line-height:1.75;color:#c3c9d2}
+.lede b{color:#fff;font-weight:600}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#a9b1bb}
+.eyebrow i{font-style:normal;color:#6a93b8;margin:0 6px}
+.badge{display:inline-flex;flex-direction:column;gap:4px;margin-top:30px;padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(22,25,31,.6);backdrop-filter:blur(10px)}
+.badge b{font-size:11px;font-weight:700;letter-spacing:.24em;color:#d6a06a;text-transform:uppercase}
+.badge span{font-size:12px;color:#a9b1bb}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 28px;border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.04em;transition:transform .2s,background .2s}
+.btn.p{background:#d68a4d;color:#0c0e13}
+.btn.p:hover{background:#e0a068;transform:translateY(-2px)}
+.btn.s{border:1px solid rgba(255,255,255,.28);color:#fff;background:rgba(12,14,19,.35)}
+.btn.s:hover{border-color:#6a93b8;transform:translateY(-2px)}
+.cue{position:absolute;left:72px;bottom:44px;display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#cfd5dd}
+.cue span{display:block;width:1px;height:42px;background:linear-gradient(#d68a4d,transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(1);transform-origin:bottom;opacity:.2}}
+
+.stack{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+.card{display:flex;gap:18px;padding:20px 22px;border-radius:18px;background:rgba(22,25,31,.82);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.ico{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#1d222b;border:1px solid rgba(214,138,77,.6)}
+.ico.b{border-color:rgba(106,147,184,.65)}
+.ico svg{width:22px;height:22px;fill:none;stroke:#d68a4d;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ico.b svg{stroke:#6a93b8}
+.card h3{margin:2px 0 6px;font-size:17px;font-weight:600;line-height:1.3;color:#fff}
+.card p{margin:0;font-size:14px;line-height:1.62;color:#a9b1bb}
+.card ul{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:5px}
+.card li{position:relative;padding-left:18px;font-size:14px;color:#e7e9ee}
+.card li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:#d68a4d}
+.card.blue li::before{background:#6a93b8}
+.card .note{margin:0;padding-top:10px;border-top:1px dashed rgba(255,255,255,.16);font-style:italic;font-size:13px;color:#a9b1bb}
+.prod{flex-direction:column;gap:12px}
+.prodhead{display:flex;align-items:center;gap:14px}
+.prodhead h3{margin:0}
+
+/* ---------- contact ---------- */
+.sec.contact{justify-content:center;flex-direction:column;gap:26px}
+.ccard{width:min(820px,100%);padding:44px 48px;border-radius:26px;background:rgba(22,25,31,.78);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.ccard::before{content:"";display:block;height:3px;margin:-44px -48px 40px;border-radius:26px 26px 0 0;background:linear-gradient(90deg,#6a93b8,#d6b083 35%,#d68a4d 65%,#6a93b8)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:26px 36px;margin-top:30px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1)}
+.cgrid small{display:block;margin-bottom:6px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#6a93b8}
+.cgrid div{font-size:15px;line-height:1.6;color:#e7e9ee}
+.cgrid a:hover{color:#d68a4d}
+.foot{font-size:12px;letter-spacing:.06em;color:#a9b1bb;text-align:center}
+.foot b{color:#fff}.foot i{font-style:normal;color:#d68a4d}
+
+/* ---------- scroll-driven animation ---------- */
+@supports (animation-timeline: view()) {
+  .oldwrap{display:block}
+  .hero-out{animation:heroOut linear both;animation-timeline:--page;animation-range:contain 3% contain 10%}
+  .fall{animation:crumble cubic-bezier(.6,0,.85,.5) both;animation-timeline:--page;animation-range:contain var(--s) contain var(--e)}
+  .jag{animation:jag linear both;animation-timeline:--page;animation-range:contain var(--s) contain var(--e)}
+  .dust{animation:dustUp ease-out both;animation-timeline:--page;animation-range:contain 7% contain 30%}
+  .oldwrap{animation:clearOld ease-in both;animation-timeline:--page;animation-range:contain 31% contain 43%}
+  .nt{animation:rise cubic-bezier(.2,.7,.3,1) both;animation-timeline:--page;animation-range:contain var(--s) contain var(--e)}
+  .scaf{animation:scafGrow linear both;animation-timeline:--page;animation-range:contain 36% contain 76%}
+  .scafwrap{animation:scafOut linear both;animation-timeline:--page;animation-range:contain 74% contain 86%}
+  .veil{animation:veil linear both;animation-timeline:--page;animation-range:contain 86% contain 97%}
+  .rv{animation:reveal linear both;animation-timeline:view();animation-range:entry 4% entry 52%}
+}
+@keyframes heroOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-40px)}}
+@keyframes crumble{from{transform:none;filter:none}to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(var(--sc));filter:brightness(.62) saturate(.55)}}
+@keyframes jag{from{clip-path:polygon(0 0,33% 0,66% 0,100% 0,100% 100%,0 100%)}to{clip-path:polygon(0 var(--j1),33% var(--j2),66% var(--j3),100% var(--j4),100% 100%,0 100%)}}
+@keyframes dustUp{0%{opacity:0;transform:translateY(0) scale(.4)}45%{opacity:.8}100%{opacity:0;transform:translateY(-40%) scale(1.7)}}
+@keyframes clearOld{from{opacity:1;transform:none}to{opacity:0;transform:translateY(7%)}}
+@keyframes rise{0%{opacity:0;transform:translateY(var(--rise)) rotate(var(--rot))}55%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes scafGrow{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes scafOut{from{opacity:.5}to{opacity:0}}
+@keyframes veil{from{background:rgba(12,14,19,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0)}to{background:rgba(12,14,19,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}}
+@keyframes reveal{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  .nav{padding:0 20px}
+  .links{gap:14px}
+  .links a{font-size:10px;letter-spacing:.1em}
+  .links a.cta{padding:8px 12px}
+  .brand b{font-size:18px}
+  .sec{padding:92px 20px 40px}
+  .cue{left:20px}
+  .oldbox,.newbox{width:100%}
+  .scrim{background:linear-gradient(180deg,rgba(12,14,19,.5),rgba(12,14,19,.85))}
+  .ccard{padding:32px 24px}
+  .ccard::before{margin:-32px -24px 30px}
+}
+@media (max-width:640px){
+  .brand b{display:none}
+  .links{width:100%;justify-content:space-between}
+}
+@media (prefers-reduced-motion:reduce){
+  .cue span{animation:none}
+}
+</style>
+</helmet>
+
+<div class="page">
+  <div class="wrap">
+
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="TIMELUX LLC — home">
+        <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#29313d"></stop><stop offset="1" stop-color="#1a1f27"></stop></linearGradient></defs>
+          <rect x="4" y="4" width="92" height="92" rx="26" fill="url(#lg)" stroke="#6b4b35" stroke-width="3.5"></rect>
+          <rect x="36" y="30" width="28" height="9" rx="3.5" fill="#6a93b8"></rect>
+          <rect x="30" y="43" width="40" height="9" rx="3.5" fill="#8a96a6"></rect>
+          <rect x="24" y="56" width="52" height="9" rx="3.5" fill="#d68a4d"></rect>
+        </svg>
+        <b>TIMELUX <i>LLC</i></b>
+      </a>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#core">Core</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#advantage">Advantage</a>
+        <a class="cta" href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- ================= STICKY BACKGROUND STAGE ================= -->
+    <div class="stage" aria-hidden="true">
+
+      <!-- Act 1 + 2: the old building, then its remains -->
+      <div class="oldwrap">
+        <div class="oldbox">
+          <div class="oldplate img-plate"></div>
+          <sc-for list="{{oldTiles}}" as="t" hint-placeholder-count="1">
+            <div class="{{t.cls}} img-old" style="{{t.style}}"></div>
+          </sc-for>
+          <div class="dust" style="left:0%;bottom:20%;width:28%;aspect-ratio:1"></div>
+          <div class="dust" style="left:18%;bottom:26%;width:30%;aspect-ratio:1"></div>
+          <div class="dust" style="left:38%;bottom:20%;width:28%;aspect-ratio:1"></div>
+          <div class="dust" style="left:10%;bottom:38%;width:24%;aspect-ratio:1"></div>
+        </div>
+      </div>
+
+      <!-- Act 3 + 4: the new building rises -->
+      <div class="newbox">
+        <sc-for list="{{newTiles}}" as="n" hint-placeholder-count="1">
+          <div class="nt" style="{{n.style}}"></div>
+        </sc-for>
+        <div class="scafwrap"><div class="scaf"></div></div>
+      </div>
+
+      <div class="scrim"></div>
+      <!-- Act 5: blur veil behind the contact card -->
+      <div class="veil"></div>
+    </div>
+
+    <!-- ================= CONTENT ================= -->
+    <div class="content">
+
+      <!-- HOME -->
+      <section class="sec" id="home" aria-labelledby="home-h">
+        <div class="col hero-out">
+          <div class="eyebrow">Metal &amp; Scrap Trading<i>·</i>Global Export Logistics</div>
+          <h1 id="home-h">Torn down today.<br><em>Built again tomorrow.</em></h1>
+          <p class="lede"><b>TIMELUX LLC</b> is a premier metal and scrap trading enterprise headquartered in Sharjah Media City (SHAMS Free Zone), United Arab Emirates — a vital link in the regional and international recycling supply chain. We source, process, trade and export high-grade ferrous and non-ferrous scrap, turning waste into the reliable, high-purity raw material that heavy industry builds with.</p>
+          <div class="btns">
+            <a class="btn p" href="#contact">Request a quote</a>
+            <a class="btn s" href="#core">See how we work</a>
+          </div>
+          <div class="badge"><b>Sharjah Media City</b><span>SHAMS Free Zone · United Arab Emirates</span></div>
+        </div>
+        <div class="cue hero-out"><span></span>Scroll</div>
+      </section>
+
+      <!-- CORE -->
+      <section class="sec" id="core" aria-labelledby="core-h">
+        <div class="col">
+          <div class="label rv"><i class="tag b"></i>Core Operations &amp; Infrastructure</div>
+          <h2 class="rv" id="core-h">Three engines behind <em>every shipment</em></h2>
+          <p class="lede rv">What is torn down does not go to waste. Every tonne we handle moves through three connected capabilities — the yard, the port and the trade lane — so quality is controlled from the first sort to the final bill of lading.</p>
+          <div class="stack">
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14M5 19h14M12 8v8M9.5 13.5 12 16l2.5-2.5M9.5 10.5 12 8l2.5 2.5"></path></svg></div>
+              <div><h3>Industrial Processing &amp; Shearing</h3><p>Heavy machinery and material handlers sort, clean and mechanically shear bulky raw scrap into high-density, furnace-ready dimensions — so it melts faster, yields more and arrives exactly as specified.</p></div>
+            </div>
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"></path><circle cx="7" cy="18" r="1.6"></circle><circle cx="17" cy="18" r="1.6"></circle></svg></div>
+              <div><h3>Global Logistics &amp; Export Management</h3><p>End-to-end maritime container freight, customs clearance and cross-border trade compliance through the UAE's major trade corridors — one accountable partner from our yard to your berth.</p></div>
+            </div>
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.4"></circle><circle cx="18" cy="6" r="2.4"></circle><circle cx="18" cy="18" r="2.4"></circle><path d="m8.2 10.9 7.6-3.8M8.2 13.1l7.6 3.8"></path></svg></div>
+              <div><h3>Established Trade Lanes</h3><p>Secure, high-volume logistical pipelines delivering premium processed scrap to industrial foundries and mills across India and Asia — built to support repeat, high-volume shipments.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section class="sec" id="portfolio" aria-labelledby="portfolio-h">
+        <div class="col">
+          <div class="label rv"><i class="tag"></i>Product Portfolio</div>
+          <h2 class="rv" id="portfolio-h">Raw material for <em>what's built next</em></h2>
+          <p class="lede rv">A focused range of ferrous, non-ferrous and salvage streams — each sorted to specification and supplied against clear grading, so every buyer knows exactly what arrives.</p>
+          <div class="stack">
+            <div class="card blue prod rv">
+              <div class="prodhead"><div class="ico b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 5h12M6 19h12M12 5v14"></path></svg></div><h3>Ferrous Metals</h3></div>
+              <div>
+                <ul><li>Heavy Melting Steel (HMS 1 &amp; 2)</li><li>Shredded Steel</li><li>Industrial Structural Scrap</li></ul>
+                <p class="note">Supplied directly to steel melting foundries &amp; infrastructure mills.</p>
+              </div>
+            </div>
+            <div class="card prod rv">
+              <div class="prodhead"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6"></circle><ellipse cx="12" cy="12" rx="9" ry="3.8"></ellipse><ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(120 12 12)"></ellipse></svg></div><h3>Non-Ferrous Metals</h3></div>
+              <div>
+                <ul><li>High-grade Copper (Millberry)</li><li>Aluminium (Tense / Extrusions)</li><li>Brass &amp; Zinc Alloys</li></ul>
+                <p class="note">Tied directly to global metal indices for premium manufacturing.</p>
+              </div>
+            </div>
+            <div class="card blue prod rv">
+              <div class="prodhead"><div class="ico b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7.8 4.5v9L12 21l-7.8-4.5v-9z"></path><circle cx="12" cy="12" r="2.8"></circle></svg></div><h3>Industrial Salvage</h3></div>
+              <div>
+                <ul><li>Redundant industrial machinery</li><li>Factory off-cuts</li><li>Large-scale demolition scrap</li></ul>
+                <p class="note">Managed via structured salvage contracts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADVANTAGE -->
+      <section class="sec" id="advantage" aria-labelledby="advantage-h">
+        <div class="col">
+          <div class="label rv"><i class="tag b"></i>The Competitive Advantage</div>
+          <h2 class="rv" id="advantage-h">Reliability, <em>built into every load</em></h2>
+          <p class="lede rv">Metal is a business of margins and trust. Three commitments keep our customers' supply lines steady and their cargo disputes rare.</p>
+          <div class="stack">
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18"></path></svg></div>
+              <div><h3>Strategic Global Base</h3><p>Our presence in the SHAMS Free Zone offers exceptional logistical connectivity to major regional shipping ports — fast transit times and cargo that keeps moving.</p></div>
+            </div>
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"></path><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg></div>
+              <div><h3>Quality Assurance</h3><p>Every consignment undergoes strict inbound and outbound inspection for density and purity, eliminating destination-port grading disputes before they start.</p></div>
+            </div>
+            <div class="card rv">
+              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20v-6M12 20V8M18 20V4"></path></svg></div>
+              <div><h3>Predictable Supply Chains</h3><p>Localised sourcing networks and reliable corporate supply contracts maintain steady material buffers, so high-volume agreements are delivered on schedule, shipment after shipment.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="sec contact" id="contact" aria-labelledby="contact-h">
+        <div class="ccard rv">
+          <div class="label"><i class="tag"></i>Contact</div>
+          <h2 id="contact-h">Ready to <em>move metal?</em></h2>
+          <p class="lede">Tell us the grade, quantity and destination port, and we'll come back with availability and terms. Whether it's a single container or a long-term supply contract, our team in Sharjah is ready to talk.</p>
+          <div class="btns">
+            <a class="btn p" href="mailto:info@timelux.ae">Email info@timelux.ae</a>
+            <a class="btn s" href="https://www.timelux.ae">Visit timelux.ae</a>
+          </div>
+          <div class="cgrid">
+            <div><small>Head office</small>Sharjah Media City (SHAMS Free Zone)<br>Sharjah, United Arab Emirates</div>
+            <div><small>Email</small><a href="mailto:info@timelux.ae">info@timelux.ae</a></div>
+            <div><small>Website</small><a href="https://www.timelux.ae">www.timelux.ae</a></div>
+            <div><small>What to send us</small>Metal grade, tonnage, packaging preference and destination port.</div>
+          </div>
+        </div>
+        <div class="foot"><b>TIMELUX <i>LLC</i></b> · Metal &amp; Scrap Trading · Global Export Logistics · © 2026</div>
+      </section>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    // deterministic pseudo-random so every load looks the same
+    let seed = 20261013;
+    const rnd = () => {
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const f = (n, d = 2) => Number(n).toFixed(d);
+
+    // ---- OLD BUILDING: 6 x 6 tiles laid over the building footprint of the photo ----
+    const fx = 0.1125, fy = 0.1133, y0 = 0.11;
+    const keep = [0, 2, 3, 5];          // row-4 tiles that survive as jagged stumps
+    const oldTiles = [];
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const ty = y0 + r * fy;
+        let style =
+          'left:' + f(c * fx * 100, 3) + '%;top:' + f(ty * 100, 3) + '%;' +
+          'width:calc(' + f(fx * 100, 3) + '% + 1px);height:calc(' + f(fy * 100, 3) + '% + 1px);' +
+          'background-size:' + f(100 / fx) + '% ' + f(100 / fy) + '%;' +
+          'background-position:' + f(c * fx / (1 - fx) * 100, 3) + '% ' + f(ty / (1 - fy) * 100, 3) + '%;';
+        let cls = 'tile';
+        if (r <= 3 || (r === 4 && !keep.includes(c))) {
+          const s = r <= 3 ? 0.035 + r * 0.024 + c * 0.004 + rnd() * 0.01 : 0.12 + rnd() * 0.02;
+          const e = s + (r <= 3 ? 0.09 + rnd() * 0.012 : 0.09);
+          const n = r <= 3 ? (4.15 - r) + rnd() * 0.7 : 0.15 + rnd() * 0.3;
+          style += '--s:' + f(s * 100, 1) + '%;--e:' + f(e * 100, 1) + '%;' +
+            '--dx:' + f((rnd() - 0.5) * 110, 0) + '%;--dy:' + f(n * 100, 0) + '%;' +
+            '--rot:' + f((rnd() - 0.5) * 80, 0) + 'deg;--sc:' + f(0.55 + rnd() * 0.3) + ';';
+          cls = 'tile fall';
+        } else if (r === 4) {
+          style += '--s:17%;--e:24%;--j1:' + f(15 + rnd() * 50, 0) + '%;--j2:' + f(15 + rnd() * 50, 0) +
+            '%;--j3:' + f(15 + rnd() * 50, 0) + '%;--j4:' + f(15 + rnd() * 50, 0) + '%;';
+          cls = 'tile jag';
+        }
+        oldTiles.push({ cls, style });
+      }
+    }
+
+    // ---- NEW BUILDING: 6 x 6 tiles, bottom rows first, top rows finish by the Advantage section ----
+    const newTiles = [];
+    const f6 = 1 / 6;
+    for (let r = 0; r < 6; r++) {
+      for (let c = 0; c < 6; c++) {
+        const k = 5 - r;
+        let s, e;
+        if (k < 3) { s = 0.36 + k * 0.035 + c * 0.003 + rnd() * 0.006; e = s + 0.065; }
+        else { s = [0.5, 0.575, 0.65][k - 3] + c * 0.004 + rnd() * 0.008; e = s + 0.085; }
+        const style =
+          'left:' + f(c * f6 * 100, 3) + '%;top:' + f(r * f6 * 100, 3) + '%;' +
+          'width:calc(' + f(f6 * 100, 3) + '% + 1px);height:calc(' + f(f6 * 100, 3) + '% + 1px);' +
+          'background-size:600% 600%;background-position:' + f(c / 5 * 100, 2) + '% ' + f(r / 5 * 100, 2) + '%;' +
+          '--s:' + f(s * 100, 1) + '%;--e:' + f(e * 100, 1) + '%;--rise:' + f(90 + rnd() * 50, 0) + '%;' +
+          '--rot:' + f((rnd() - 0.5) * 10, 1) + 'deg;';
+        newTiles.push({ style });
+      }
+    }
+    return { oldTiles, newTiles };
+  }
+}
+</script>
+</body>
+</html>
